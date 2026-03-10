@@ -1,0 +1,125 @@
+<div class="app">
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>My Music</h2>
+    <ul>
+      <li (click)="goToHome()">Home</li>
+      <li (click)="goToLibrary()">Your Library</li>
+    </ul>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+
+    <!-- HOME PAGE -->
+    <div *ngIf="currentPage === 'home'">
+      <!-- Search -->
+      <div class="search-container">
+        <input type="text" placeholder="Search songs or artists..." [(ngModel)]="query" (keyup.enter)="search()">
+        <button (click)="search()">Search</button>
+      </div>
+
+      <!-- Songs Grid -->
+      <div class="songs-grid">
+        <div class="song-card"
+             (click)="play(song)"
+             *ngFor="let song of songs"
+             [class.playing]="song.id.videoId === currentSong?.id.videoId">
+
+          <div class="image-container">
+            <img [src]="song.snippet.thumbnails.medium.url">
+            <div class="play-overlay">▶</div>
+          </div>
+
+          <h4>{{ getSongTitle(song.snippet.title) }}</h4>
+          <p>{{ song.snippet.channelTitle }}</p>
+
+          <!-- Heart button -->
+          <button (click)="toggleFavorite(song); $event.stopPropagation()"
+                  class="heart-button"
+                  [class.favorited]="isFavorite(song)">
+            {{ isFavorite(song) ? '♥' : '♡' }}
+          </button>
+
+          <!-- Playing bars -->
+          <div *ngIf="song.id.videoId === currentSong?.id.videoId" class="playing-bars">
+            <span></span><span></span><span></span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- LIBRARY PAGE -->
+    <div *ngIf="currentPage === 'library'">
+      <h3>Favorites</h3>
+      <div class="songs-grid" *ngIf="favorites.length > 0">
+        <div class="song-card"
+             (click)="play(song)"
+             *ngFor="let song of favorites"
+             [class.playing]="song.id.videoId === currentSong?.id.videoId">
+
+          <div class="image-container">
+            <img [src]="song.snippet.thumbnails.medium.url">
+            <div class="play-overlay">▶</div>
+          </div>
+
+          <h4>{{ getSongTitle(song.snippet.title) }}</h4>
+          <p>{{ song.snippet.channelTitle }}</p>
+
+          <button (click)="toggleFavorite(song); $event.stopPropagation()"
+                  class="heart-button"
+                  [class.favorited]="isFavorite(song)">
+            {{ isFavorite(song) ? '♥' : '♡' }}
+          </button>
+
+          <div *ngIf="song.id.videoId === currentSong?.id.videoId" class="playing-bars">
+            <span></span><span></span><span></span>
+          </div>
+
+        </div>
+      </div>
+      <p *ngIf="favorites.length === 0">No favorites yet.</p>
+    </div>
+
+  </div>
+
+  <!-- Hidden YouTube Player -->
+  <div id="hidden-player"></div>
+
+  <!-- Custom Music Player -->
+  <div class="music-player" *ngIf="currentSong">
+
+    <img [src]="currentSong.snippet.thumbnails.medium.url" class="thumbnail">
+
+    <div class="song-info">
+      <h4>{{ currentSong.snippet.title }}</h4>
+      <p>{{ currentSong.snippet.channelTitle }}</p>
+    </div>
+
+    <div class="controls">
+      <button (click)="prevSong()">⏮</button>
+      <button (click)="togglePlay()">{{ isPlaying ? '⏸' : '▶' }}</button>
+      <button (click)="nextSong()">⏭</button>
+      <button (click)="toggleFavorite(currentSong)" class="heart-button" [class.favorited]="isFavorite(currentSong)">
+        {{ isFavorite(currentSong) ? '♥' : '♡' }}
+      </button>
+    </div>
+
+    <input type="range"
+           min="0"
+           max="100"
+           [(ngModel)]="progress"
+           (input)="seek($event)"
+           class="progress-bar"
+           [ngStyle]="progressBarStyle">
+
+    <div class="time-display">
+      <span>{{ formatTime(currentTime) }}</span>
+      <span>{{ formatTime(duration) }}</span>
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,27 @@
+body{
+margin:0;
+padding:0;
+background:#121212;
+font-family:Arial, Helvetica, sans-serif;
+color:white;
+}
+
+app-root{
+display:block;
+width:100%;
+}
+
+.header{
+text-align:center;
+padding:20px;
+background:#1f1f1f;
+box-shadow:0 2px 10px rgba(0,0,0,0.6);
+}
+
+h1{
+margin:0;
+}
+
+main{
+padding:20px;
+}

@@ -1,0 +1,25 @@
+<div class="search-container">
+
+<input
+type="text"
+placeholder="Search songs, artists..."
+[(ngModel)]="query">
+
+<button (click)="search()">Search</button>
+
+</div>
+
+
+<div class="songs-grid">
+
+<div class="song-card" *ngFor="let song of songs">
+
+<img [src]="song.snippet.thumbnails.medium.url">
+
+<h3>{{song.snippet.title}}</h3>
+
+<p>{{song.snippet.channelTitle}}</p>
+
+</div>
+
+</div>

@@ -1,0 +1,360 @@
+/* Global Styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #121212;
+  color: white;
+}
+
+.app {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  grid-template-rows: 1fr 90px;
+  height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  background: #000;
+  padding: 20px;
+}
+
+.sidebar h2 {
+  color: #1db954;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  padding: 10px 0;
+  cursor: pointer;
+  color: #ccc;
+}
+
+.sidebar li:hover {
+  color: white;
+}
+
+/* Main content */
+.main {
+  padding: 20px;
+  overflow: auto;
+}
+
+.container {
+  width: 100%;
+  margin: 0;
+}
+
+/* Search */
+.search-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 40px 0;
+}
+
+.search-container input {
+  width: 500px;
+  padding: 14px 20px;
+  border-radius: 30px;
+  border: none;
+  background: #242424;
+  color: white;
+  font-size: 16px;
+  outline: none;
+}
+
+.search-container button {
+  background: #1db954;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  color: white;
+  cursor: pointer;
+}
+
+/* Songs grid */
+.songs-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 25px;
+  padding: 20px 50px;
+  box-sizing: border-box;
+}
+
+/* Song cards */
+.song-card {
+  position: relative;
+  padding: 10px;
+  border-radius: 5px;
+  background: #282828;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+}
+
+.song-card:hover {
+  transform: translateY(-5px);
+}
+
+.song-card.playing {
+  background-color: #1db95420; /* light green overlay */
+  box-shadow: 0 0 10px #1db954;
+  transform: scale(1.02);
+}
+
+.song-card.playing:hover {
+  background-color: #1db95430;
+}
+
+.image-container {
+  position: relative;
+}
+
+.image-container img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+/* Play overlay */
+.play-overlay {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: #1db954;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.song-card:hover .play-overlay {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.song-card h4 {
+  font-size: 14px;
+  margin: 10px 0 5px;
+  color: white;
+}
+
+/* Heart button */
+.heart-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 30px;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  color: #fff;
+  transition: color 0.3s;
+}
+
+.heart-button.favorited {
+  color: red;
+}
+
+/* Music Player */
+.music-player {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background: #181818;
+  display: flex;
+  align-items: center;
+  padding: 10px 30px;
+  gap: 20px;
+  border-top: 1px solid #1db954;
+}
+
+.thumbnail {
+  width: 60px;
+  height: 60px;
+  border-radius: 6px;
+}
+
+.song-info {
+  flex: 1;
+}
+
+.controls button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+/* Progress Bar */
+input[type="range"].progress-bar {
+  width: 300px;
+  height: 6px;
+  border-radius: 3px;
+  appearance: none;
+  -webkit-appearance: none;
+  background: linear-gradient(to right, #1db954 0%, #1db954 0%, #ccc 0%, #ccc 100%);
+  outline: none;
+}
+
+input[type="range"].progress-bar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #40a078;
+  border: 2px solid #21c421;
+  cursor: pointer;
+  margin-top: -4px;
+}
+
+input[type="range"].progress-bar::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid green;
+  cursor: pointer;
+}
+
+/* Time display */
+.time-display {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+/* Playing bars */
+.playing-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.playing-bars span {
+  display: block;
+  width: 3px;
+  height: 4px;
+  background-color: #1db954;
+  animation: bounce 1s infinite;
+}
+
+.playing-bars span:nth-child(2) { animation-delay: 0.2s; }
+.playing-bars span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes bounce {
+  0%, 100% { height: 4px; }
+  50% { height: 12px; }
+}
+
+
+/* MOBILE RESPONSIVENESS */
+@media screen and (max-width: 768px) {
+
+  /* App layout: navbar on top, main below, player at bottom */
+  .app {
+    grid-template-columns: 1fr; /* single column */
+    grid-template-rows: auto 1fr auto; /* navbar, main content, player */
+  }
+
+  /* Sidebar becomes top navbar */
+  .sidebar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 10px 5px;
+    width: 100%;
+  }
+
+  .sidebar h2 {
+    display: none; /* hide title for compact view */
+  }
+
+  .sidebar ul {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+  }
+
+  .sidebar li {
+    padding: 5px;
+    font-size: 14px;
+  }
+
+  /* Search container adjustments */
+  .search-container {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    margin: 20px 0;
+  }
+
+  .search-container input {
+    width: 80%;
+    font-size: 14px;
+    padding: 10px 14px;
+  }
+
+  .search-container button {
+    margin-top: 10px;
+    padding: 8px 14px;
+    font-size: 14px;
+  }
+
+  /* Songs grid: 2 cards per row */
+  .songs-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 10px 20px;
+  }
+
+  /* Music player responsive */
+  .music-player {
+    width: 100%;
+    padding: 10px 15px;
+    height: 70px;
+    gap: 10px;
+  }
+
+  .thumbnail {
+    width: 50px;
+    height: 50px;
+  }
+
+  .controls button {
+    font-size: 18px;
+    margin: 0 5px;
+  }
+
+  input[type="range"].progress-bar {
+    width: 180px;
+  }
+
+  .song-card h4 {
+    font-size: 12px;
+  }
+
+  .heart-button {
+    font-size: 24px;
+    bottom: 8px;
+    right: 8px;
+  }
+}
