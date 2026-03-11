@@ -11,6 +11,16 @@
 npm-debug.log
 yarn-error.log
 
+# Angular build
+dist/
+
+# Environment variables
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
 # IDEs and editors
 .idea/
 .project

@@ -1,11 +1,9 @@
-require('dotenv').config();
+require("dotenv").config();
+
 const express = require("express");
 const cors = require("cors");
-const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const youtubeRoutes = require("./routes/youtubeRoutes");
-
-dotenv.config();
 
 const app = express();
 
@@ -14,12 +12,11 @@ connectDB();
 
 app.use(cors());
 app.use(express.json());
+
+// routes
 app.use("/api/youtube", youtubeRoutes);
 
-// import routes
 const songRoutes = require("./routes/songRoutes");
-
-// use routes
 app.use("/api/songs", songRoutes);
 
 app.get("/", (req, res) => {
