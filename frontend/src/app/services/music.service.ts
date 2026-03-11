@@ -9,7 +9,7 @@ export class MusicService {
   constructor(private http: HttpClient) {}
 
   searchSongs(query: string) {
-    return this.http.get(`http://localhost:5000/api/youtube/search?q=${query}`);
+    return this.http.get(`https://youtube-clone-backend-4bh4.onrender.com/api/youtube/search?q=${query}`);
   }
 
 }
