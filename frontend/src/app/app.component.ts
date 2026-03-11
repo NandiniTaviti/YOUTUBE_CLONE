@@ -46,14 +46,14 @@ this.currentPage = 'library';
 }
 
 loadSuggestions() {
-fetch("/api/youtube/search?q=top songs")
+fetch("https://youtube-clone-backend-4bh4.onrender.com/api/youtube/search?q=top songs")
 .then(res => res.json())
 .then(data => this.songs = data);
 }
 
 search() {
 if (!this.query.trim()) return;
-fetch(`/api/youtube/search?q=${encodeURIComponent(this.query)}`)
+fetch(`https://youtube-clone-backend-4bh4.onrender.com/api/youtube/search?q=${encodeURIComponent(this.query)}`)
 .then(res => res.json())
 .then(data => this.songs = data);
 }
